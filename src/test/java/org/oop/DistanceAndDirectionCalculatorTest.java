@@ -1,63 +1,43 @@
 package org.oop;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.oop.DistanceAndDirectionCalculator.direction;
+import org.junit.jupiter.api.Assertions;
 
 public class DistanceAndDirectionCalculatorTest {
-
     @Test
-    void twoPointsWithSameXAndYCoordinatesShouldHaveADistanceOfZero() {
-        Point origin = new Point(0, 0);
-        Assertions.assertEquals(0, DistanceAndDirectionCalculator.distance(origin, origin));
+    void shouldHaveADistanceOfZeroWhenTwoPointsWithSameXAndYCoordinates() {
+
+        double expectedDistance = 0.0;
+
+        Point origin = new Point(0,0);
+
+        double actualDistance = origin.distanceBetweenTwoPoints(origin);
+
+        Assertions.assertEquals(expectedDistance, actualDistance);
     }
 
     @Test
-    void distanceBetweenOriginAndPointsOnUnitCircleShouldBeOne() {
+    void shouldHaveUnitDistanceBetweenOriginAndPointsOnUnitCircle() {
+        double expectedDistance = 1.0;
+
         Point origin = new Point(0, 0);
         Point point1 = new Point(1, 0);
-        Point point2 = new Point(0, 1);
 
-        Assertions.assertEquals(1, DistanceAndDirectionCalculator.distance(origin, point1));
-        Assertions.assertEquals(1, DistanceAndDirectionCalculator.distance(origin, point2));
+        double actualDistance = origin.distanceBetweenTwoPoints(point1);
+
+        Assertions.assertEquals(expectedDistance, actualDistance);
     }
 
     @Test
-    void distanceBetweenTwoOppositePointsOnUnitCircleShouldBeTwo() {
+    void shouldHaveDoubledDistanceBetweenTwoOppositePointsOnUnitCircle() {
+        double expectedDistance = 2.0;
+
         Point point1 = new Point(1, 0);
         Point point2 = new Point(-1, 0);
 
-        Assertions.assertEquals(2, DistanceAndDirectionCalculator.distance(point1, point2));
-    }
+        double actualDistance = point1.distanceBetweenTwoPoints(point2);
 
-    @Test
-    void originAndPointOnPostiveXAxisShouldBeZeroRadiansAway() {
-        Point origin = new Point(0, 0);
-        Point point1 = new Point(1, 0);
-        Point point2 = new Point(3, 0);
+        Assertions.assertEquals(expectedDistance, actualDistance);
 
-        Assertions.assertEquals(0, direction(origin, point1));
-        Assertions.assertEquals(0, direction(origin, point2));
-    }
-
-    @Test
-    void originAndPointOnNegativeXAxisShouldBePiRadiansAway() {
-        Point origin = new Point(0, 0);
-        Point point1 = new Point(-1, 0);
-        Point point2 = new Point(-3, 0);
-
-        Assertions.assertEquals(Math.PI, direction(origin, point1));
-        Assertions.assertEquals(Math.PI, direction(origin, point2));
-    }
-
-    @Test
-    void originAndPointOnYAxisShouldBeHalfPiRadiansAway() {
-        Point origin = new Point(0, 0);
-        Point point1 = new Point(0, 1);
-        Point point2 = new Point(0, 3);
-
-        Assertions.assertEquals(Math.PI / 2, direction(origin, point2));
-        Assertions.assertEquals(Math.PI / 2, direction(origin, point1));
     }
 }
